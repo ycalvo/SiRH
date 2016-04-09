@@ -1,0 +1,26 @@
+﻿@model rh.Data.DEDUCCIONES
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DEDUCCIONES</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DEDDESCRIPCION)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DEDDESCRIPCION)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_DEDUCCION }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

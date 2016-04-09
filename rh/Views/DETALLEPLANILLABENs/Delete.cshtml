@@ -1,0 +1,48 @@
+﻿@model rh.Data.DETALLEPLANILLABEN
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DETALLEPLANILLABEN</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MONTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLEPLANILLABEN1.ID_BENEFICIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLEPLANILLABEN1.ID_BENEFICIO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLEPLANILLABEN2.ID_BENEFICIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLEPLANILLABEN2.ID_BENEFICIO)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

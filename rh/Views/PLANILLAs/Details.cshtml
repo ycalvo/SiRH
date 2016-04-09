@@ -1,0 +1,42 @@
+﻿@model rh.Data.PLANILLA
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PLANILLA</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PLAFECHA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PLAFECHA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SEDE)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SEDE)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PLATOTAL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PLATOTAL)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_PLANILLA }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

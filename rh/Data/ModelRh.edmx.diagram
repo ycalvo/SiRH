@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ecb54efa37c74bde8021db837d347a7e" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_RHumanosModel.BENEFICIOS" Width="1.5" PointX="5.75" PointY="3.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.CATEGORIAS" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.DEDUCCIONES" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.DEPARTAMENTO" Width="1.5" PointX="2.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.DETALLEPLANILLABEN" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.DETALLEPLATILLADED" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.FUN_FUNCIONARIO" Width="1.5" PointX="7" PointY="0.875" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.FUNCIONES" Width="1.5" PointX="4.75" PointY="0.875" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.PLANILLA" Width="1.5" PointX="4.75" PointY="6.75" />
+        <EntityTypeShape EntityType="DB_RHumanosModel.TBFUNCIONARIO" Width="1.5" PointX="3" PointY="3.875" />
+        <AssociationConnector Association="DB_RHumanosModel.FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN" />
+        <AssociationConnector Association="DB_RHumanosModel.FK_DETALLEPLATILLADED_DETALLEPLATILLADED" />
+        <AssociationConnector Association="DB_RHumanosModel.FK_FUN_FUNCIONARIO_FUNCIONES" />
+        <AssociationConnector Association="DB_RHumanosModel.CAT_FUNCIONARIO" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

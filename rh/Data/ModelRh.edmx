@@ -1,0 +1,496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DB_RHumanosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BENEFICIOS">
+          <Key>
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_BENEFICIO" Type="int" Nullable="false" />
+          <Property Name="BENDESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CAT_FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+            <PropertyRef Name="ID_FUNCIONARIO" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="ID_FUNCIONARIO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="CATDESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEDUCCIONES">
+          <Key>
+            <PropertyRef Name="ID_DEDUCCION" />
+          </Key>
+          <Property Name="ID_DEDUCCION" Type="int" Nullable="false" />
+          <Property Name="DEDDESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="ID_DEPARTAMENTO" />
+          </Key>
+          <Property Name="ID_DEPARTAMENTO" Type="int" Nullable="false" />
+          <Property Name="DEPARTAMENTO" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLEPLANILLABEN">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="int" Nullable="false" />
+          <Property Name="ID_FUNCIONARIO" Type="int" Nullable="false" />
+          <Property Name="ID_BENEFICIO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="MONTO" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLEPLATILLADED">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_DEDUCCION" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="int" Nullable="false" />
+          <Property Name="ID_FUNCIONARIO" Type="int" Nullable="false" />
+          <Property Name="ID_DEDUCCION" Type="int" Nullable="false" />
+          <Property Name="MONTO" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUN_FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_FUNCIONES" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="int" Nullable="false" />
+          <Property Name="ID_FUNCIONES" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FUNCIONES">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONES" />
+          </Key>
+          <Property Name="ID_FUNCIONES" Type="int" Nullable="false" />
+          <Property Name="FUNCDESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PLANILLA">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="int" Nullable="false" />
+          <Property Name="PLAFECHA" Type="date" Nullable="false" />
+          <Property Name="SEDE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PLATOTAL" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBFUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="int" Nullable="false" />
+          <Property Name="FUNNOMBRE" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FUNAPELLIDO1" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FUNAPELLIDO2" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CAT_FUNCIONARIO_CATEGORIAS">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+          <End Role="CAT_FUNCIONARIO" Type="Self.CAT_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="CAT_FUNCIONARIO">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CAT_FUNCIONARIO_TBFUNCIONARIO">
+          <End Role="TBFUNCIONARIO" Type="Self.TBFUNCIONARIO" Multiplicity="1" />
+          <End Role="CAT_FUNCIONARIO" Type="Self.CAT_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TBFUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Principal>
+            <Dependent Role="CAT_FUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN">
+          <End Role="DETALLEPLANILLABEN" Type="Self.DETALLEPLANILLABEN" Multiplicity="1" />
+          <End Role="DETALLEPLANILLABEN1" Type="Self.DETALLEPLANILLABEN" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLEPLANILLABEN">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_BENEFICIO" />
+            </Principal>
+            <Dependent Role="DETALLEPLANILLABEN1">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_BENEFICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLEPLATILLADED_DETALLEPLATILLADED">
+          <End Role="DETALLEPLATILLADED" Type="Self.DETALLEPLATILLADED" Multiplicity="1" />
+          <End Role="DETALLEPLATILLADED1" Type="Self.DETALLEPLATILLADED" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLEPLATILLADED">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_DEDUCCION" />
+            </Principal>
+            <Dependent Role="DETALLEPLATILLADED1">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_DEDUCCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUN_FUNCIONARIO_FUNCIONES">
+          <End Role="FUNCIONES" Type="Self.FUNCIONES" Multiplicity="1" />
+          <End Role="FUN_FUNCIONARIO" Type="Self.FUN_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONES">
+              <PropertyRef Name="ID_FUNCIONES" />
+            </Principal>
+            <Dependent Role="FUN_FUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_RHumanosModelStoreContainer">
+          <EntitySet Name="BENEFICIOS" EntityType="Self.BENEFICIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CAT_FUNCIONARIO" EntityType="Self.CAT_FUNCIONARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEDUCCIONES" EntityType="Self.DEDUCCIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="Self.DEPARTAMENTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLEPLANILLABEN" EntityType="Self.DETALLEPLANILLABEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLEPLATILLADED" EntityType="Self.DETALLEPLATILLADED" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUN_FUNCIONARIO" EntityType="Self.FUN_FUNCIONARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FUNCIONES" EntityType="Self.FUNCIONES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PLANILLA" EntityType="Self.PLANILLA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TBFUNCIONARIO" EntityType="Self.TBFUNCIONARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CAT_FUNCIONARIO_CATEGORIAS" Association="Self.FK_CAT_FUNCIONARIO_CATEGORIAS">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="CAT_FUNCIONARIO" EntitySet="CAT_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CAT_FUNCIONARIO_TBFUNCIONARIO" Association="Self.FK_CAT_FUNCIONARIO_TBFUNCIONARIO">
+            <End Role="TBFUNCIONARIO" EntitySet="TBFUNCIONARIO" />
+            <End Role="CAT_FUNCIONARIO" EntitySet="CAT_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN" Association="Self.FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN">
+            <End Role="DETALLEPLANILLABEN" EntitySet="DETALLEPLANILLABEN" />
+            <End Role="DETALLEPLANILLABEN1" EntitySet="DETALLEPLANILLABEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLEPLATILLADED_DETALLEPLATILLADED" Association="Self.FK_DETALLEPLATILLADED_DETALLEPLATILLADED">
+            <End Role="DETALLEPLATILLADED" EntitySet="DETALLEPLATILLADED" />
+            <End Role="DETALLEPLATILLADED1" EntitySet="DETALLEPLATILLADED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUN_FUNCIONARIO_FUNCIONES" Association="Self.FK_FUN_FUNCIONARIO_FUNCIONES">
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+            <End Role="FUN_FUNCIONARIO" EntitySet="FUN_FUNCIONARIO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_RHumanosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DB_RHumanosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BENEFICIOS" EntityType="DB_RHumanosModel.BENEFICIOS" />
+          <EntitySet Name="CATEGORIAS" EntityType="DB_RHumanosModel.CATEGORIAS" />
+          <EntitySet Name="DEDUCCIONES" EntityType="DB_RHumanosModel.DEDUCCIONES" />
+          <EntitySet Name="DEPARTAMENTO" EntityType="DB_RHumanosModel.DEPARTAMENTO" />
+          <EntitySet Name="DETALLEPLANILLABEN" EntityType="DB_RHumanosModel.DETALLEPLANILLABEN" />
+          <EntitySet Name="DETALLEPLATILLADED" EntityType="DB_RHumanosModel.DETALLEPLATILLADED" />
+          <EntitySet Name="FUN_FUNCIONARIO" EntityType="DB_RHumanosModel.FUN_FUNCIONARIO" />
+          <EntitySet Name="FUNCIONES" EntityType="DB_RHumanosModel.FUNCIONES" />
+          <EntitySet Name="PLANILLA" EntityType="DB_RHumanosModel.PLANILLA" />
+          <EntitySet Name="TBFUNCIONARIO" EntityType="DB_RHumanosModel.TBFUNCIONARIO" />
+          <AssociationSet Name="FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN" Association="DB_RHumanosModel.FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN">
+            <End Role="DETALLEPLANILLABEN" EntitySet="DETALLEPLANILLABEN" />
+            <End Role="DETALLEPLANILLABEN1" EntitySet="DETALLEPLANILLABEN" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DETALLEPLATILLADED_DETALLEPLATILLADED" Association="DB_RHumanosModel.FK_DETALLEPLATILLADED_DETALLEPLATILLADED">
+            <End Role="DETALLEPLATILLADED" EntitySet="DETALLEPLATILLADED" />
+            <End Role="DETALLEPLATILLADED1" EntitySet="DETALLEPLATILLADED" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FUN_FUNCIONARIO_FUNCIONES" Association="DB_RHumanosModel.FK_FUN_FUNCIONARIO_FUNCIONES">
+            <End Role="FUNCIONES" EntitySet="FUNCIONES" />
+            <End Role="FUN_FUNCIONARIO" EntitySet="FUN_FUNCIONARIO" />
+          </AssociationSet>
+          <AssociationSet Name="CAT_FUNCIONARIO" Association="DB_RHumanosModel.CAT_FUNCIONARIO">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="TBFUNCIONARIO" EntitySet="TBFUNCIONARIO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="BENEFICIOS">
+          <Key>
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_BENEFICIO" Type="Int32" Nullable="false" />
+          <Property Name="BENDESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+          <Property Name="CATDESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TBFUNCIONARIO" Relationship="DB_RHumanosModel.CAT_FUNCIONARIO" FromRole="CATEGORIAS" ToRole="TBFUNCIONARIO" />
+        </EntityType>
+        <EntityType Name="DEDUCCIONES">
+          <Key>
+            <PropertyRef Name="ID_DEDUCCION" />
+          </Key>
+          <Property Name="ID_DEDUCCION" Type="Int32" Nullable="false" />
+          <Property Name="DEDDESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DEPARTAMENTO">
+          <Key>
+            <PropertyRef Name="ID_DEPARTAMENTO" />
+          </Key>
+          <Property Name="ID_DEPARTAMENTO" Type="Int32" Nullable="false" />
+          <Property Name="DEPARTAMENTO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="DETALLEPLANILLABEN">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_BENEFICIO" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="Int32" Nullable="false" />
+          <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_BENEFICIO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="MONTO" Type="Single" Nullable="false" />
+          <NavigationProperty Name="DETALLEPLANILLABEN1" Relationship="DB_RHumanosModel.FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN" FromRole="DETALLEPLANILLABEN" ToRole="DETALLEPLANILLABEN1" />
+          <NavigationProperty Name="DETALLEPLANILLABEN2" Relationship="DB_RHumanosModel.FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN" FromRole="DETALLEPLANILLABEN1" ToRole="DETALLEPLANILLABEN" />
+        </EntityType>
+        <EntityType Name="DETALLEPLATILLADED">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_DEDUCCION" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="Int32" Nullable="false" />
+          <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_DEDUCCION" Type="Int32" Nullable="false" />
+          <Property Name="MONTO" Type="Single" Nullable="false" />
+          <NavigationProperty Name="DETALLEPLATILLADED1" Relationship="DB_RHumanosModel.FK_DETALLEPLATILLADED_DETALLEPLATILLADED" FromRole="DETALLEPLATILLADED" ToRole="DETALLEPLATILLADED1" />
+          <NavigationProperty Name="DETALLEPLATILLADED2" Relationship="DB_RHumanosModel.FK_DETALLEPLATILLADED_DETALLEPLATILLADED" FromRole="DETALLEPLATILLADED1" ToRole="DETALLEPLATILLADED" />
+        </EntityType>
+        <EntityType Name="FUN_FUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+            <PropertyRef Name="ID_FUNCIONES" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
+          <Property Name="ID_FUNCIONES" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FUNCIONES" Relationship="DB_RHumanosModel.FK_FUN_FUNCIONARIO_FUNCIONES" FromRole="FUN_FUNCIONARIO" ToRole="FUNCIONES" />
+        </EntityType>
+        <EntityType Name="FUNCIONES">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONES" />
+          </Key>
+          <Property Name="ID_FUNCIONES" Type="Int32" Nullable="false" />
+          <Property Name="FUNCDESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FUN_FUNCIONARIO" Relationship="DB_RHumanosModel.FK_FUN_FUNCIONARIO_FUNCIONES" FromRole="FUNCIONES" ToRole="FUN_FUNCIONARIO" />
+        </EntityType>
+        <EntityType Name="PLANILLA">
+          <Key>
+            <PropertyRef Name="ID_PLANILLA" />
+          </Key>
+          <Property Name="ID_PLANILLA" Type="Int32" Nullable="false" />
+          <Property Name="PLAFECHA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="SEDE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PLATOTAL" Type="Single" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TBFUNCIONARIO">
+          <Key>
+            <PropertyRef Name="ID_FUNCIONARIO" />
+          </Key>
+          <Property Name="ID_FUNCIONARIO" Type="Int32" Nullable="false" />
+          <Property Name="FUNNOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FUNAPELLIDO1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FUNAPELLIDO2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="CATEGORIAS" Relationship="DB_RHumanosModel.CAT_FUNCIONARIO" FromRole="TBFUNCIONARIO" ToRole="CATEGORIAS" />
+        </EntityType>
+        <Association Name="FK_DETALLEPLANILLABEN_DETALLEPLANILLABEN">
+          <End Type="DB_RHumanosModel.DETALLEPLANILLABEN" Role="DETALLEPLANILLABEN" Multiplicity="1" />
+          <End Type="DB_RHumanosModel.DETALLEPLANILLABEN" Role="DETALLEPLANILLABEN1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLEPLANILLABEN">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_BENEFICIO" />
+            </Principal>
+            <Dependent Role="DETALLEPLANILLABEN1">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_BENEFICIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DETALLEPLATILLADED_DETALLEPLATILLADED">
+          <End Type="DB_RHumanosModel.DETALLEPLATILLADED" Role="DETALLEPLATILLADED" Multiplicity="1" />
+          <End Type="DB_RHumanosModel.DETALLEPLATILLADED" Role="DETALLEPLATILLADED1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="DETALLEPLATILLADED">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_DEDUCCION" />
+            </Principal>
+            <Dependent Role="DETALLEPLATILLADED1">
+              <PropertyRef Name="ID_PLANILLA" />
+              <PropertyRef Name="ID_FUNCIONARIO" />
+              <PropertyRef Name="ID_DEDUCCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FUN_FUNCIONARIO_FUNCIONES">
+          <End Type="DB_RHumanosModel.FUNCIONES" Role="FUNCIONES" Multiplicity="1" />
+          <End Type="DB_RHumanosModel.FUN_FUNCIONARIO" Role="FUN_FUNCIONARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FUNCIONES">
+              <PropertyRef Name="ID_FUNCIONES" />
+            </Principal>
+            <Dependent Role="FUN_FUNCIONARIO">
+              <PropertyRef Name="ID_FUNCIONES" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CAT_FUNCIONARIO">
+          <End Type="DB_RHumanosModel.CATEGORIAS" Role="CATEGORIAS" Multiplicity="*" />
+          <End Type="DB_RHumanosModel.TBFUNCIONARIO" Role="TBFUNCIONARIO" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_RHumanosModelStoreContainer" CdmEntityContainer="DB_RHumanosEntities">
+          <EntitySetMapping Name="BENEFICIOS">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.BENEFICIOS">
+              <MappingFragment StoreEntitySet="BENEFICIOS">
+                <ScalarProperty Name="BENDESCRIPCION" ColumnName="BENDESCRIPCION" />
+                <ScalarProperty Name="ID_BENEFICIO" ColumnName="ID_BENEFICIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIAS">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.CATEGORIAS">
+              <MappingFragment StoreEntitySet="CATEGORIAS">
+                <ScalarProperty Name="CATDESCRIPCION" ColumnName="CATDESCRIPCION" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEDUCCIONES">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.DEDUCCIONES">
+              <MappingFragment StoreEntitySet="DEDUCCIONES">
+                <ScalarProperty Name="DEDDESCRIPCION" ColumnName="DEDDESCRIPCION" />
+                <ScalarProperty Name="ID_DEDUCCION" ColumnName="ID_DEDUCCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPARTAMENTO">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.DEPARTAMENTO">
+              <MappingFragment StoreEntitySet="DEPARTAMENTO">
+                <ScalarProperty Name="DEPARTAMENTO1" ColumnName="DEPARTAMENTO" />
+                <ScalarProperty Name="ID_DEPARTAMENTO" ColumnName="ID_DEPARTAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLEPLANILLABEN">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.DETALLEPLANILLABEN">
+              <MappingFragment StoreEntitySet="DETALLEPLANILLABEN">
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="ID_BENEFICIO" ColumnName="ID_BENEFICIO" />
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+                <ScalarProperty Name="ID_PLANILLA" ColumnName="ID_PLANILLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLEPLATILLADED">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.DETALLEPLATILLADED">
+              <MappingFragment StoreEntitySet="DETALLEPLATILLADED">
+                <ScalarProperty Name="MONTO" ColumnName="MONTO" />
+                <ScalarProperty Name="ID_DEDUCCION" ColumnName="ID_DEDUCCION" />
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+                <ScalarProperty Name="ID_PLANILLA" ColumnName="ID_PLANILLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUN_FUNCIONARIO">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.FUN_FUNCIONARIO">
+              <MappingFragment StoreEntitySet="FUN_FUNCIONARIO">
+                <ScalarProperty Name="ID_FUNCIONES" ColumnName="ID_FUNCIONES" />
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FUNCIONES">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.FUNCIONES">
+              <MappingFragment StoreEntitySet="FUNCIONES">
+                <ScalarProperty Name="FUNCDESCRIPCION" ColumnName="FUNCDESCRIPCION" />
+                <ScalarProperty Name="ID_FUNCIONES" ColumnName="ID_FUNCIONES" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PLANILLA">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.PLANILLA">
+              <MappingFragment StoreEntitySet="PLANILLA">
+                <ScalarProperty Name="PLATOTAL" ColumnName="PLATOTAL" />
+                <ScalarProperty Name="SEDE" ColumnName="SEDE" />
+                <ScalarProperty Name="PLAFECHA" ColumnName="PLAFECHA" />
+                <ScalarProperty Name="ID_PLANILLA" ColumnName="ID_PLANILLA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TBFUNCIONARIO">
+            <EntityTypeMapping TypeName="DB_RHumanosModel.TBFUNCIONARIO">
+              <MappingFragment StoreEntitySet="TBFUNCIONARIO">
+                <ScalarProperty Name="FUNAPELLIDO2" ColumnName="FUNAPELLIDO2" />
+                <ScalarProperty Name="FUNAPELLIDO1" ColumnName="FUNAPELLIDO1" />
+                <ScalarProperty Name="FUNNOMBRE" ColumnName="FUNNOMBRE" />
+                <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CAT_FUNCIONARIO" TypeName="DB_RHumanosModel.CAT_FUNCIONARIO" StoreEntitySet="CAT_FUNCIONARIO">
+            <EndProperty Name="TBFUNCIONARIO">
+              <ScalarProperty Name="ID_FUNCIONARIO" ColumnName="ID_FUNCIONARIO" />
+            </EndProperty>
+            <EndProperty Name="CATEGORIAS">
+              <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

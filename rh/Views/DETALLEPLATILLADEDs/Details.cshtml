@@ -1,0 +1,42 @@
+﻿@model rh.Data.DETALLEPLATILLADED
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>DETALLEPLATILLADED</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MONTO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MONTO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLEPLATILLADED1.ID_PLANILLA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLEPLATILLADED1.ID_PLANILLA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DETALLEPLATILLADED2.ID_PLANILLA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DETALLEPLATILLADED2.ID_PLANILLA)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
